@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://example.com/sitemap.xml
+
+# If you change your domain, update the Sitemap line above.
