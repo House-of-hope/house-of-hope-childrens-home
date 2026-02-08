@@ -9,31 +9,31 @@ const staticPrograms = [
   {
     id: "education",
     title: "Educational Support",
-    image: "/images/programs/education.jpg",
+    image: "/images/programs/education.JPG",
     description:
       "Providing scholarships, school supplies, and learning assistance to help orphans and vulnerable children access and excel in education.",
   },
   {
     title: "Mentorship",
-    image: "/images/programs/mentorship.jpg",
+    image: "/images/programs/mentorship.JPG",
     description:
       "Equipping children with character, confidence, and life skills through one-on-one and group mentorship sessions.",
   },
   {
     title: "Counseling",
-    image: "/images/programs/counseling.jpg",
+    image: "/images/programs/counseling.JPG",
     description:
       "Offering emotional and psychological support to help children heal from trauma, loss, and difficult life experiences.",
   },
   {
     title: "Talent Nurturing",
-    image: "/images/programs/talent.jpg",
+    image: "/images/programs/talent.JPG",
     description:
       "Developing children’s talents in sports, dance, arts, and music — promoting self-expression and confidence.",
   },
   {
     title: "Technology & Skills Training",
-    image: "/images/programs/tech.jpg",
+    image: "/images/programs/tech.JPG",
     description:
       "Empowering children with digital literacy and practical life skills to prepare them for the future.",
   },

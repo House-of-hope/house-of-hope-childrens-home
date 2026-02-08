@@ -7,9 +7,9 @@ import Link from "next/link";
 
 export default function Hero() {
   const slides = [
-    "/images/hero3.jpg",
-    "/images/hero2.jpg",
-    "/images/hero1.jpg",
+    "/images/hero3.JPG",
+    "/images/hero2.JPG",
+    "/images/hero1.JPG",
   ];
 
   const [index, setIndex] = useState(0);
