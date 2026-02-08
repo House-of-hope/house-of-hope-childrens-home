@@ -1,4 +1,4 @@
-import { createClient, type EntryFieldTypes, type Entry, type EntrySkeletonType } from 'contentful';
+import { createClient, type EntryFieldTypes, type Entry, type EntrySkeletonType, type Asset } from 'contentful';
 
 /**
  * Initialize Contentful client
@@ -106,6 +106,17 @@ type BlogPostData = {
   author: string;
 };
 
+// Helper function to extract image URL from Asset
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getImageUrl(asset: any): string | null {
+  if (!asset) return null;
+  
+  const assetFields = asset?.fields;
+  const fileUrl = assetFields?.file?.url;
+  
+  return fileUrl ? `https:${fileUrl}` : null;
+}
+
 /**
  * Fetch all programs from Contentful
  */
@@ -125,9 +136,7 @@ export async function getPrograms(): Promise<ProgramData[]> {
       id: item.fields.id,
       title: item.fields.title,
       description: item.fields.description,
-      image: item.fields.image?.fields?.file?.url
-        ? `https:${item.fields.image.fields.file.url}`
-        : null,
+      image: getImageUrl(item.fields.image),
     }));
   } catch (error) {
     console.error('Error fetching programs from Contentful:', error);
@@ -178,10 +187,9 @@ export async function getGalleryImages(): Promise<string[]> {
       limit: 50,
     });
 
-    return entries.items.map((item) => {
-      const imageUrl = item.fields.image?.fields?.file?.url;
-      return imageUrl ? `https:${imageUrl}` : '';
-    }).filter(Boolean);
+    return entries.items
+      .map((item) => getImageUrl(item.fields.image))
+      .filter((url): url is string => url !== null);
   } catch (error) {
     console.error('Error fetching gallery images from Contentful:', error);
     return [];
@@ -209,9 +217,7 @@ export async function getChildren(): Promise<ChildData[]> {
       age: item.fields.age,
       bio: item.fields.bio,
       story: item.fields.story,
-      image: item.fields.image?.fields?.file?.url
-        ? `https:${item.fields.image.fields.file.url}`
-        : null,
+      image: getImageUrl(item.fields.image),
     }));
   } catch (error) {
     console.error('Error fetching children from Contentful:', error);
@@ -243,9 +249,7 @@ export async function getChildById(id: string): Promise<ChildData | null> {
       age: item.fields.age,
       bio: item.fields.bio,
       story: item.fields.story,
-      image: item.fields.image?.fields?.file?.url
-        ? `https:${item.fields.image.fields.file.url}`
-        : null,
+      image: getImageUrl(item.fields.image),
     };
   } catch (error) {
     console.error('Error fetching child from Contentful:', error);
@@ -273,9 +277,7 @@ export async function getBlogPosts(): Promise<BlogPostData[]> {
       title: item.fields.title,
       excerpt: item.fields.excerpt,
       content: item.fields.content,
-      image: item.fields.image?.fields?.file?.url
-        ? `https:${item.fields.image.fields.file.url}`
-        : null,
+      image: getImageUrl(item.fields.image),
       publishedAt: item.fields.publishedAt,
       author: item.fields.author,
     }));
@@ -308,9 +310,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPostData | nu
       title: item.fields.title,
       excerpt: item.fields.excerpt,
       content: item.fields.content,
-      image: item.fields.image?.fields?.file?.url
-        ? `https:${item.fields.image.fields.file.url}`
-        : null,
+      image: getImageUrl(item.fields.image),
       publishedAt: item.fields.publishedAt,
       author: item.fields.author,
     };
