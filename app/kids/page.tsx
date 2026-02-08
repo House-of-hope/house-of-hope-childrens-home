@@ -35,7 +35,21 @@ export default async function KidsPage() {
           <article key={kid.id} className="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
-                <Image src={kid.image} alt={`${kid.name} from House of Hope`} width={80} height={80} className="object-cover" unoptimized priority />
+                {kid.image ? (
+                  <Image 
+                    src={kid.image} 
+                    alt={`${kid.name} from House of Hope`} 
+                    width={80} 
+                    height={80} 
+                    className="object-cover" 
+                    unoptimized 
+                    priority 
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
+                    No Image
+                  </div>
+                )}
               </div>
 
               <div>
